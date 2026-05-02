@@ -30,19 +30,35 @@ class UtilisateurRepositoryTest {
     @Test
     void should_FindUsersByClasseNiveau_When_UsersExistForLevel() {
         // Arrange
-        Classe classe1 = new Classe("4INFO", Niveau.QUATRIEME);
+        Classe classe1 = new Classe();
+        classe1.setTitre("4INFO");
+        classe1.setNiveau(Niveau.QUATRIEME);
         entityManager.persist(classe1);
         
-        Classe classe2 = new Classe("3INFO", Niveau.TROISIEME);
+        Classe classe2 = new Classe();
+        classe2.setTitre("3INFO");
+        classe2.setNiveau(Niveau.TROISIEME);
         entityManager.persist(classe2);
         
-        Utilisateur user1 = new Utilisateur("Alice", "Dupont", "pass123", classe1);
+        Utilisateur user1 = new Utilisateur();
+        user1.setPrenom("Alice");
+        user1.setNom("Dupont");
+        user1.setPassword("pass123");
+        user1.setClasse(classe1);
         entityManager.persist(user1);
         
-        Utilisateur user2 = new Utilisateur("Bob", "Martin", "pass456", classe1);
+        Utilisateur user2 = new Utilisateur();
+        user2.setPrenom("Bob");
+        user2.setNom("Martin");
+        user2.setPassword("pass456");
+        user2.setClasse(classe1);
         entityManager.persist(user2);
         
-        Utilisateur user3 = new Utilisateur("Charlie", "Bernard", "pass789", classe2);
+        Utilisateur user3 = new Utilisateur();
+        user3.setPrenom("Charlie");
+        user3.setNom("Bernard");
+        user3.setPassword("pass789");
+        user3.setClasse(classe2);
         entityManager.persist(user3);
         
         entityManager.flush();
@@ -64,10 +80,16 @@ class UtilisateurRepositoryTest {
     @Test
     void should_ReturnEmptyList_When_NoUsersExistForLevel() {
         // Arrange
-        Classe classe = new Classe("4INFO", Niveau.QUATRIEME);
+        Classe classe = new Classe();
+        classe.setTitre("4INFO");
+        classe.setNiveau(Niveau.QUATRIEME);
         entityManager.persist(classe);
         
-        Utilisateur user = new Utilisateur("Alice", "Dupont", "pass123", classe);
+        Utilisateur user = new Utilisateur();
+        user.setPrenom("Alice");
+        user.setNom("Dupont");
+        user.setPassword("pass123");
+        user.setClasse(classe);
         entityManager.persist(user);
         
         entityManager.flush();
@@ -82,13 +104,22 @@ class UtilisateurRepositoryTest {
     @Test
     void should_NotIncludeUsersWithoutClasse_When_FindingByNiveau() {
         // Arrange
-        Classe classe = new Classe("4INFO", Niveau.QUATRIEME);
+        Classe classe = new Classe();
+        classe.setTitre("4INFO");
+        classe.setNiveau(Niveau.QUATRIEME);
         entityManager.persist(classe);
         
-        Utilisateur userWithClasse = new Utilisateur("Alice", "Dupont", "pass123", classe);
+        Utilisateur userWithClasse = new Utilisateur();
+        userWithClasse.setPrenom("Alice");
+        userWithClasse.setNom("Dupont");
+        userWithClasse.setPassword("pass123");
+        userWithClasse.setClasse(classe);
         entityManager.persist(userWithClasse);
         
-        Utilisateur userWithoutClasse = new Utilisateur("Bob", "Martin", "pass456");
+        Utilisateur userWithoutClasse = new Utilisateur();
+        userWithoutClasse.setPrenom("Bob");
+        userWithoutClasse.setNom("Martin");
+        userWithoutClasse.setPassword("pass456");
         entityManager.persist(userWithoutClasse);
         
         entityManager.flush();

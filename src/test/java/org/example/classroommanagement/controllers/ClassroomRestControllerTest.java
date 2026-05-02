@@ -40,13 +40,21 @@ class ClassroomRestControllerTest {
     
     @BeforeEach
     void setUp() {
-        testUser = new Utilisateur("John", "Doe", "password123");
+        testUser = new Utilisateur();
+        testUser.setPrenom("John");
+        testUser.setNom("Doe");
+        testUser.setPassword("password123");
         testUser.setIdUtilisateur(1);
         
-        testClasse = new Classe("4INFO", Niveau.QUATRIEME);
+        testClasse = new Classe();
+        testClasse.setTitre("4INFO");
+        testClasse.setNiveau(Niveau.QUATRIEME);
         testClasse.setCodeClasse(1);
         
-        testCours = new CoursClassroom(Specialite.INFORMATIQUE, "Java Programming", 40);
+        testCours = new CoursClassroom();
+        testCours.setSpecialite(Specialite.INFORMATIQUE);
+        testCours.setNom("Java Programming");
+        testCours.setNbHeures(40);
         testCours.setIdCours(1);
     }
     

@@ -1,0 +1,263 @@
+{
+  "info": {
+    "_postman_id": "b9b4b7ed-5df1-4b3d-8f53-7a10ab0d3b7a",
+    "name": "Classroom Management API",
+    "description": "Collection for testing the Classroom Management Spring Boot API. Import this collection together with the environment file and select the Classroom Management Local environment in Postman.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prenom\": \"Sarah\",\n  \"nom\": \"Ben Ali\",\n  \"password\": \"secret123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/classroom/utilisateurs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "classroom", "utilisateurs"]
+            },
+            "description": "Creates a new user. The response contains the generated idUtilisateur."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.idUtilisateur) {",
+                  "    pm.environment.set('createdUserId', jsonData.idUtilisateur);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get all users",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/classroom/utilisateurs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "classroom", "utilisateurs"]
+            },
+            "description": "Returns all users currently stored in the database."
+          }
+        },
+        {
+          "name": "Get user by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/classroom/utilisateurs/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "classroom", "utilisateurs", "{{userId}}"]
+            },
+            "description": "Fetches a single user by idUtilisateur. Defaults to the seeded user id if available."
+          }
+        },
+        {
+          "name": "Count users by niveau",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/classroom/utilisateurs/count?niveau={{niveau}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "classroom", "utilisateurs", "count"],
+              "query": [
+                {
+                  "key": "niveau",
+                  "value": "{{niveau}}"
+                }
+              ]
+            },
+            "description": "Counts users assigned to classes at the selected academic level."
+          }
+        },
+        {
+          "name": "Assign user to class",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{baseUrl}}/api/classroom/utilisateurs/{{userId}}/classes/{{classId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "classroom",
+                "utilisateurs",
+                "{{userId}}",
+                "classes",
+                "{{classId}}"
+              ]
+            },
+            "description": "Assigns an existing user to an existing class. No request body is required."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Classes",
+      "item": [
+        {
+          "name": "Create class",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"4AG1\",\n  \"niveau\": \"QUATRIEME\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/classroom/classes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "classroom", "classes"]
+            },
+            "description": "Creates a new class. The response contains the generated codeClasse."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.codeClasse) {",
+                  "    pm.environment.set('createdClassId', jsonData.codeClasse);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Courses",
+      "item": [
+        {
+          "name": "Create course for class",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"specialite\": \"INFORMATIQUE\",\n  \"nom\": \"Programmation Java\",\n  \"nbHeures\": 42\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/classroom/cours/{{classId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "classroom", "cours", "{{classId}}"]
+            },
+            "description": "Creates a new course and attaches it to the specified class. The response contains the generated idCours."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.idCours) {",
+                  "    pm.environment.set('createdCourseId', jsonData.idCours);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Unassign course from class",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/classroom/cours/{{courseId}}/classe",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "classroom", "cours", "{{courseId}}", "classe"]
+            },
+            "description": "Removes the class association from an existing course."
+          }
+        },
+        {
+          "name": "Sum hours by specialite and niveau",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/classroom/cours/heures?specialite={{specialite}}&niveau={{niveau}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "classroom", "cours", "heures"],
+              "query": [
+                {
+                  "key": "specialite",
+                  "value": "{{specialite}}"
+                },
+                {
+                  "key": "niveau",
+                  "value": "{{niveau}}"
+                }
+              ]
+            },
+            "description": "Returns the total number of hours for courses matching the selected specialty and level."
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "userId",
+      "value": "1"
+    },
+    {
+      "key": "classId",
+      "value": "1"
+    },
+    {
+      "key": "courseId",
+      "value": "1"
+    },
+    {
+      "key": "niveau",
+      "value": "QUATRIEME"
+    },
+    {
+      "key": "specialite",
+      "value": "INFORMATIQUE"
+    }
+  ]
+}
