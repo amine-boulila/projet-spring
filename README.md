@@ -35,12 +35,17 @@ A Spring Boot REST API application for managing university classrooms, courses, 
 CREATE DATABASE classroomdb;
 ```
 
-2. Update database credentials in `src/main/resources/application.properties`:
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/classroomdb
-spring.datasource.username=postgres
-spring.datasource.password=your_password
+2. Copy the template configuration file:
+```bash
+cp src/main/resources/application.properties.template src/main/resources/application.properties
 ```
+
+3. Update database credentials in `src/main/resources/application.properties`:
+```properties
+spring.datasource.password=your_actual_password
+```
+
+**Note**: The `application.properties` file is excluded from version control to protect your database credentials.
 
 ## Running the Application
 

@@ -39,7 +39,16 @@ build/
 .DS_Store
 
 ### Application Properties ###
-# Uncomment the line below if you want to exclude database credentials
-# src/main/resources/application.properties
+# Exclude database credentials from version control
+src/main/resources/application.properties
+
+### Markdown Files ###
+# Exclude all .md files except README.md
+*.md
+!README.md
+
+### Kiro Specs ###
+# Exclude spec files but keep README.md
+.kiro/
 .kiro
 .config.kiro
