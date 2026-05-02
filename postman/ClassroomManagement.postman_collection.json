@@ -24,9 +24,9 @@
               "raw": "{\n  \"prenom\": \"Sarah\",\n  \"nom\": \"Ben Ali\",\n  \"password\": \"secret123\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/api/classroom/utilisateurs",
+              "raw": "{{baseUrl}}/api/utilisateurs",
               "host": ["{{baseUrl}}"],
-              "path": ["api", "classroom", "utilisateurs"]
+              "path": ["api", "utilisateurs"]
             },
             "description": "Creates a new user. The response contains the generated idUtilisateur."
           },
@@ -53,9 +53,9 @@
           "request": {
             "method": "GET",
             "url": {
-              "raw": "{{baseUrl}}/api/classroom/utilisateurs",
+              "raw": "{{baseUrl}}/api/utilisateurs",
               "host": ["{{baseUrl}}"],
-              "path": ["api", "classroom", "utilisateurs"]
+              "path": ["api", "utilisateurs"]
             },
             "description": "Returns all users currently stored in the database."
           }
@@ -65,9 +65,9 @@
           "request": {
             "method": "GET",
             "url": {
-              "raw": "{{baseUrl}}/api/classroom/utilisateurs/{{userId}}",
+              "raw": "{{baseUrl}}/api/utilisateurs/{{userId}}",
               "host": ["{{baseUrl}}"],
-              "path": ["api", "classroom", "utilisateurs", "{{userId}}"]
+              "path": ["api", "utilisateurs", "{{userId}}"]
             },
             "description": "Fetches a single user by idUtilisateur. Defaults to the seeded user id if available."
           }
@@ -77,9 +77,9 @@
           "request": {
             "method": "GET",
             "url": {
-              "raw": "{{baseUrl}}/api/classroom/utilisateurs/count?niveau={{niveau}}",
+              "raw": "{{baseUrl}}/api/utilisateurs/count?niveau={{niveau}}",
               "host": ["{{baseUrl}}"],
-              "path": ["api", "classroom", "utilisateurs", "count"],
+              "path": ["api", "utilisateurs", "count"],
               "query": [
                 {
                   "key": "niveau",
@@ -95,11 +95,10 @@
           "request": {
             "method": "PUT",
             "url": {
-              "raw": "{{baseUrl}}/api/classroom/utilisateurs/{{userId}}/classes/{{classId}}",
+              "raw": "{{baseUrl}}/api/utilisateurs/{{userId}}/classes/{{classId}}",
               "host": ["{{baseUrl}}"],
               "path": [
                 "api",
-                "classroom",
                 "utilisateurs",
                 "{{userId}}",
                 "classes",
@@ -129,9 +128,9 @@
               "raw": "{\n  \"titre\": \"4AG1\",\n  \"niveau\": \"QUATRIEME\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/api/classroom/classes",
+              "raw": "{{baseUrl}}/api/classes",
               "host": ["{{baseUrl}}"],
-              "path": ["api", "classroom", "classes"]
+              "path": ["api", "classes"]
             },
             "description": "Creates a new class. The response contains the generated codeClasse."
           },
@@ -173,9 +172,9 @@
               "raw": "{\n  \"specialite\": \"INFORMATIQUE\",\n  \"nom\": \"Programmation Java\",\n  \"nbHeures\": 42\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/api/classroom/cours/{{classId}}",
+              "raw": "{{baseUrl}}/api/cours/{{classId}}",
               "host": ["{{baseUrl}}"],
-              "path": ["api", "classroom", "cours", "{{classId}}"]
+              "path": ["api", "cours", "{{classId}}"]
             },
             "description": "Creates a new course and attaches it to the specified class. The response contains the generated idCours."
           },
@@ -202,9 +201,9 @@
           "request": {
             "method": "DELETE",
             "url": {
-              "raw": "{{baseUrl}}/api/classroom/cours/{{courseId}}/classe",
+              "raw": "{{baseUrl}}/api/cours/{{courseId}}/classe",
               "host": ["{{baseUrl}}"],
-              "path": ["api", "classroom", "cours", "{{courseId}}", "classe"]
+              "path": ["api", "cours", "{{courseId}}", "classe"]
             },
             "description": "Removes the class association from an existing course."
           }
@@ -214,9 +213,9 @@
           "request": {
             "method": "GET",
             "url": {
-              "raw": "{{baseUrl}}/api/classroom/cours/heures?specialite={{specialite}}&niveau={{niveau}}",
+              "raw": "{{baseUrl}}/api/cours/heures?specialite={{specialite}}&niveau={{niveau}}",
               "host": ["{{baseUrl}}"],
-              "path": ["api", "classroom", "cours", "heures"],
+              "path": ["api", "cours", "heures"],
               "query": [
                 {
                   "key": "specialite",
