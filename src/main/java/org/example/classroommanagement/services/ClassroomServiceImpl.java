@@ -311,4 +311,38 @@ public class ClassroomServiceImpl implements IClassroomService {
         log.info("Total hours for specialite {} and niveau {}: {}", sp, nv, totalHeures);
         return totalHeures;
     }
+    
+    /**
+     * Retrieves all users in the system.
+     * 
+     * @return a list of all users
+     */
+    @Override
+    public List<Utilisateur> getAllUtilisateurs() {
+        log.debug("Retrieving all users");
+        List<Utilisateur> utilisateurs = utilisateurRepository.findAll();
+        log.info("Found {} users", utilisateurs.size());
+        return utilisateurs;
+    }
+    
+    /**
+     * Retrieves a user by their ID.
+     * 
+     * @param idUtilisateur the ID of the user to retrieve
+     * @return the user with the specified ID
+     * @throws EntityNotFoundException if the user does not exist
+     */
+    @Override
+    public Utilisateur getUtilisateurById(Integer idUtilisateur) {
+        log.debug("Retrieving user with ID: {}", idUtilisateur);
+        
+        Utilisateur utilisateur = utilisateurRepository.findById(idUtilisateur)
+                .orElseThrow(() -> {
+                    log.error("User not found with ID: {}", idUtilisateur);
+                    return new EntityNotFoundException("Utilisateur not found with ID: " + idUtilisateur);
+                });
+        
+        log.info("User found: {} {}", utilisateur.getPrenom(), utilisateur.getNom());
+        return utilisateur;
+    }
 }

@@ -102,4 +102,20 @@ public interface IClassroomService {
      * Validates Requirement: 8.1
      */
     Integer nbHeuresParSpecEtNiv(Specialite sp, Niveau nv);
+    
+    /**
+     * Retrieves all users in the system.
+     * 
+     * @return a list of all users
+     */
+    java.util.List<Utilisateur> getAllUtilisateurs();
+    
+    /**
+     * Retrieves a user by their ID.
+     * 
+     * @param idUtilisateur the ID of the user to retrieve
+     * @return the user with the specified ID
+     * @throws jakarta.persistence.EntityNotFoundException if the user does not exist
+     */
+    Utilisateur getUtilisateurById(Integer idUtilisateur);
 }

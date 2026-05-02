@@ -160,4 +160,33 @@ public class ClassroomRestController {
         Integer totalHours = classroomService.nbHeuresParSpecEtNiv(specialite, niveau);
         return ResponseEntity.ok(totalHours);
     }
+    
+    /**
+     * Endpoint 8: Get all users.
+     * 
+     * @return ResponseEntity with list of all users and 200 OK status
+     */
+    @GetMapping("/utilisateurs")
+    @Operation(summary = "Get all users", description = "Returns a list of all users in the system")
+    public ResponseEntity<java.util.List<Utilisateur>> getAllUtilisateurs() {
+        java.util.List<Utilisateur> utilisateurs = classroomService.getAllUtilisateurs();
+        return ResponseEntity.ok(utilisateurs);
+    }
+    
+    /**
+     * Endpoint 9: Get user by ID.
+     * 
+     * @param idUtilisateur the ID of the user to retrieve
+     * @return ResponseEntity with user and 200 OK status, or 404 if user not found
+     */
+    @GetMapping("/utilisateurs/{idUtilisateur}")
+    @Operation(summary = "Get user by ID", description = "Returns the user with the specified ID")
+    public ResponseEntity<Utilisateur> getUtilisateurById(@PathVariable Integer idUtilisateur) {
+        try {
+            Utilisateur utilisateur = classroomService.getUtilisateurById(idUtilisateur);
+            return ResponseEntity.ok(utilisateur);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }
